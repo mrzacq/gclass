@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ini Teacher</title>
+</head>
+<body>
+    <a href="/">Home</a>
+    <a href="/teacher">Teacher</a>
+    <a href="/student">Student</a>
+    <a href="/task/add">Add Task</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Task</th>
+                <th>Deadline</th>
+                <th>Assigne</th>
+                <th>Student</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach((elemen) => { %>
+                <tr>
+                    <td><%= elemen.id %></td>
+                    <td><%= elemen.taskname %></td>
+                    <td><%= new Date(elemen.deadline + 'UTC').toISOString().slice(0, 10) %></td>
+                    <td><%= elemen.Teacher ? elemen.Teacher.fullname : '-' %></td>
+                    <td><%= elemen.Students.firstname %></td>
+                    <td><a href="/task/edit/<%= elemen.id %>">Edit</a>
+                    ||
+                    <a href="/task/delete/<%= elemen.id %>">Delete</a></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ini Teacher</title>
+</head>
+<body>
+    <a href="/">Home</a>
+    <a href="/teacher">Teacher</a>
+    <a href="/student">Student</a>
+    <a href="/task">Task</a>
+
+    <form action="/task/add" method="POST">
+    <label for="taskname">Task:</label><br>
+    <input type="text" name="taskname"><br><br>
+
+    <label for="deadline">Deadline:</label><br>
+    <input type="date" name="deadline"><br><br>
+
+    <button type="submit">Add Task</button>
+    <a href="/task">Cancel</a>
+    </form>
+</body>
+</html>
