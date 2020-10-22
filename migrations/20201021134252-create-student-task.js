@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('StudentTasks', {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable('StudentTasks', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,14 +13,18 @@ module.exports = {
         references: {
           model: 'Students',
           key: 'id'
-        }
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade'
       },
       TaskId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Tasks',
           key: 'id'
-        }
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade'
       },
       createdAt: {
         allowNull: false,
@@ -32,7 +36,7 @@ module.exports = {
       }
     });
   },
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('StudentTasks');
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.dropTable('StudentTasks');
   }
 };
