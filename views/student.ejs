@@ -31,7 +31,9 @@
                     <td><%= elemen.phone %></td>
                     <td><a href="/student/edit/<%= elemen.id %>">Edit</a>
                     ||
-                    <a href="/student/delete/<%= elemen.id %>">Delete</a></td>
+                    <a href="/student/delete/<%= elemen.id %>">Delete</a>
+                    ||
+                    <a href="/task/<%= elemen.id %>">See Task</a></td>
                 </tr>
             <% }) %>
         </tbody>

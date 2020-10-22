@@ -45,9 +45,13 @@ class TaskController{
         const { taskname, deadline, TeacherId } = req.body
         const input = { taskname, deadline, TeacherId }
 
-        Task.update(input)
-        .then(data => res.send(data))
-        // .then(data => res.redirect('/task'))
+        Task.update(input, {
+            where: {
+                id: req.params.id
+            }
+        })
+        // .then(data => res.send(data))
+        .then(data => res.redirect('/task'))
         .catch(err => res.send(err))
     }
 

@@ -47,11 +47,11 @@ class StudentController{
         const { firstname, lastname, email, phone } = req.body
         const obj = { firstname, lastname, email, phone }
 
-        Student.update({
+        Student.update(obj, {
             where: {
                 id: req.params.id
             }, 
-            individualshooks: true
+            individualhooks: true
         })
         .then((data) => {
             res.redirect('/student')
