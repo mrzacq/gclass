@@ -9,6 +9,8 @@ router.get('/register', UserController.register)
 router.post('/register', UserController.registerPost)
 router.get('/login', UserController.login)
 router.post('/login', UserController.loginPost)
+router.get('/logout', UserController.logout)
+
 
 router.use((req,res,next) => { //// middleware
     if(req.session.userId){
