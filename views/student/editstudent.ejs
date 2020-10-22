@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ini Add Student</title>
+</head>
+<body>
+    <a href="/">Home</a>
+    <a href="/teacher">Teacher</a>
+    <a href="/student">Student</a>
+    <a href="/task">Task</a>
+
+    <form action="/student/edit/<%= editStudent[0].id %>" method="POST">
+    <label for="firstname">Firstname</label>
+    <input type="text" name="firstname" id="firstname" value="<%= editStudent[0].firstname%>">
+
+    <label for="lastname">Lastname</label>
+    <input type="text" name="lastname" id="lastname" value="<%= editStudent[0].lastname %>">
+    
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" value="<%= editStudent[0].email%>">
+    
+    <label for="phone">phone</label>
+    <input type="text" name="phone" id="phone" value="<%= editStudent[0].phone%>">
+
+    <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

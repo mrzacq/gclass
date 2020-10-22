@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ini Teacher</title>
+</head>
+<body>
+    <a href="/">home</a>
+    <a href="/teacher/add">Add Teacher</a>
+    <a href="/student">Student</a>
+    <a href="/task">Task</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach((elemen) => { %>
+                <tr>
+                    <td><%= elemen.id %></td>
+                    <td><%= elemen.fullname %></td>
+                    <td><%= elemen.email %></td>
+                    <td><%= elemen.phone %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>
