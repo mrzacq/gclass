@@ -11,7 +11,13 @@ class TaskController{
     }
 
     static addForm(req, res){
-        res.render('taskaddform.ejs')
+        Student.findAll()
+        .then((data) => {
+            res.render('taskaddform.ejs', { data })
+        })
+        .catch((err) => {
+            res.send(err)
+        })
     }
 
     static addPost(req, res){

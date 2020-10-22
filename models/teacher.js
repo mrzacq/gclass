@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const { options } = require('../router/teacher');
 module.exports = (sequelize, DataTypes) => {
   class Teacher extends Model {
     /**
@@ -22,5 +23,10 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Teacher',
   });
+  Teacher.beforeCreate((instance, options) => {
+    if(instance.phone){
+      instance.phone = `+62${instance.phone}`
+    }
+  })
   return Teacher;
 };

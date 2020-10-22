@@ -18,6 +18,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +28,7 @@
                     <td><%= elemen.fullname %></td>
                     <td><%= elemen.email %></td>
                     <td><%= elemen.phone %></td>
+                    <td><a href="/teacher/delete/<%= elemen.id %>">PECAT</a></td>
                 </tr>
             <% }) %>
         </tbody>
