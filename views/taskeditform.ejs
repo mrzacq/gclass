@@ -18,7 +18,7 @@
     <label for="deadline">Deadline:</label><br>
     <input type="date" name="deadline" value="<%= new Date(data.deadline + 'UTC').toISOString().slice(0, 10) %>"><br><br>
     
-    <label for="TeacherId">Production Houses</label>
+    <label for="TeacherId">Teacher</label>
     <select id="TeacherId" name="TeacherId">
       <option value="" <%= (!data.TeacherId) ? 'selected' : '' %> >---SELECT---</option>
       <% teacher.forEach(elemen => { %>
