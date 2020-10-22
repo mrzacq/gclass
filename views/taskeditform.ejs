@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ini Edit Tasknya</title>
+</head>
+<body>
+  <a href="/"><button>Home</button></a>
+  <a href="/teacher"><button>Teacher</button></a>
+  <a href="/student"><button>Student</button></a>
+  <a href="/task"><button>Task</button></a>
+  <% if(pesan) { %>
+    <p><%= pesan %></p>
+<%}%>
+    <form action="/task/edit/<%= data.id %>" method="POST">
+    <label for="taskname">Task:</label><br>
+    <input type="text" name="taskname" value="<%= data.taskname %>"><br><br>
+
+    <label for="deadline">Deadline:</label><br>
+    <input type="date" name="deadline" value="<%= new Date(data.deadline + 'UTC').toISOString().slice(0, 10) %>"><br><br>
+    
+    <label for="TeacherId">Teacher</label>
+    <select id="TeacherId" name="TeacherId">
+      <option value="" <%= (!data.TeacherId) ? 'selected' : '' %> >---SELECT---</option>
+      <% teacher.forEach(elemen => { %>
+        <option value="<%= elemen.id %>" <%= (data.TeacherId === elemen.id) ? 'selected' : '' %>>
+          <%=  elemen.fullname %>
+        </option>
+      <% }) %>
+    </select>
+    <button type="submit">Edit Task</button>
+    <a href="/task">Cancel</a>
+    </form>
+</body>
+</html>

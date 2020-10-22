@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ini Add Task for Student</title>
+</head>
+<body>
+    <a href="/"><button>Home</button></a>
+    <a href="/teacher"><button>Teacher</button></a>
+    <a href="/student"><button>Student</button></a>
+    <a href="/task"><button>Task</button></a>
+    
+    <h1><%= task.taskname %></h1>
+    <form action="/task/student/add/<%= task.id %>" method="POST">
+
+    <label for="StudentId">Student</label><br>
+    <select name="StudentId" id="StudentId">
+        <option value="select">---select student---</option>
+        <% student.forEach((stud) => { %>
+            <option value="<%= stud.id %>"><%= stud.fullname() %></option>
+        <% }) %>
+    </select>
+    <button type="submit">Add Student to do this task</button>
+    </form>
+
+    <h1>List Student do this task</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <% task.Students.forEach((elemen) => { %>
+            <tr>
+                <td><%= elemen.fullname() %></td>
+                <td><%= elemen.email %></td>
+                <td><%= elemen.phone %></td>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ini Student Beserta List Tasknya</title>
+</head>
+<body>
+    <a href="/"><button>Home</button></a>
+    <a href="/teacher"><button>Teacher</button></a>
+    <a href="/student"><button>Student</button></a>
+    <a href="/task"><button>Task</button></a>
+    <a href="/student/add"><button><b>Add Student</b></button></a>
+    <h1>INI STUDENT LIST TASK</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Taskname</th>
+                <th>Deadline</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.Tasks.forEach((task) => { %>
+                <tr>
+                    <td><%= task.id %></td>
+                    <td><%= task.taskname %></td>
+                    <td><%= task.deadline %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

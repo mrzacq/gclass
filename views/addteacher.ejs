@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ini Add Teacher</title>
+</head>
+<body>
+    <a href="/"><button>Home</button></a>
+    <a href="/teacher"><button>Teacher</button></a>
+    <a href="/student"><button>Student</button></a>
+    <a href="/task"><button>Task</button></a>
+    <% if(pesan) { %>
+        <p><%= pesan %></p>
+    <%}%>
+    <form action="/teacher/add" method="POST">
+    <label for="fullname">Fullname</label>
+    <input type="text" name="fullname" id="fullname">
+
+    
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email">
+    
+    <label for="phone">phone</label>
+    <input type="number" name="phone" id="phone">
+
+    <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
