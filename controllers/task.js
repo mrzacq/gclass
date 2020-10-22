@@ -12,9 +12,11 @@ class TaskController{
     }
 
     static addForm(req, res){
+        const pesan = req.app.locals.pesan || ''
+        delete req.app.locals.pesan
         Student.findAll()
         .then((data) => {
-            res.render('taskaddform.ejs', { data })
+            res.render('taskaddform.ejs', { data, pesan })
         })
         .catch((err) => {
             res.send(err)
@@ -27,18 +29,33 @@ class TaskController{
 
         Task.create(obj)
         .then(data => res.redirect('/task'))
-        .catch(err => res.send(err))
+        .catch((err) => {
+            if(err.name === "SequelizeValidationError"){
+                if(err.errors){
+                    let errors = err.errors.map(elemen => {
+                        return elemen.message
+                    })
+                    req.app.locals.pesan = errors
+                }
+                res.redirect(`/task/add`)
+            }
+            else{
+                res.send(err)
+            }
+        })
     }
 
     static editForm(req, res){
         const id = req.params.id
+        const pesan = req.app.locals.pesan || ''
+        delete req.app.locals.pesan
         let target;
         Task.findByPk(id)
         .then(dat => {
             target = dat
             return Teacher.findAll({order: [['id', 'asc']]})
         })
-        .then(teacher => res.render('taskeditform.ejs', { data: target, teacher }))
+        .then(teacher => res.render('taskeditform.ejs', { data: target, teacher, pesan }))
         .catch(err => res.send(err))
     }
 
@@ -53,7 +70,20 @@ class TaskController{
         })
         // .then(data => res.send(data))
         .then(data => res.redirect('/task'))
-        .catch(err => res.send(err))
+        .catch((err) => {
+            if(err.name === "SequelizeValidationError"){
+                if(err.errors){
+                    let errors = err.errors.map(elemen => {
+                        return elemen.message
+                    })
+                    req.app.locals.pesan = errors
+                }
+                res.redirect(`/task/edit/${req.params.id}`)
+            }
+            else{
+                res.send(err)
+            }
+        })
     }
 
     static delete(req,res){

@@ -16,9 +16,33 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Teacher.init({
-    fullname: DataTypes.STRING,
-    email: DataTypes.STRING,
-    phone: DataTypes.INTEGER
+    fullname: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'fullname tidak boleh kosong'
+        }
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'email tidak boleh kosong'
+        }
+      }
+    },
+    phone: {
+      type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'phone tidak boleh kosong'
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Teacher',

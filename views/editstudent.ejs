@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ini Add Student</title>
+    <title>Ini Edit Student</title>
 </head>
 <body>
     <a href="/"><button>Home</button></a>
     <a href="/teacher"><button>Teacher</button></a>
     <a href="/student"><button>Student</button></a>
     <a href="/task"><button>Task</button></a>
-
+    <% if(pesan) { %>
+        <p><%= pesan %></p>
+    <%}%>
     <form action="/student/edit/<%= data.id %>" method="POST">
     <label for="firstname">Firstname</label>
     <input type="text" name="firstname" id="firstname" value="<%= data.firstname%>">

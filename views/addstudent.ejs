@@ -11,6 +11,9 @@
     <a href="/student"><button>Student</button></a>
     <a href="/task"><button>Task</button></a>
 
+    <% if(pesan) { %>
+        <p><%= pesan %></p>
+    <%}%>
     <form action="/student/add" method="POST">
     <label for="firstname">Firstname</label>
     <input type="text" name="firstname" id="firstname">

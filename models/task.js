@@ -16,8 +16,24 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Task.init({
-    taskname: DataTypes.STRING,
-    deadline: DataTypes.DATE,
+    taskname:  {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'taskname tidak boleh kosong'
+        }
+      }
+    },
+    deadline: {
+      type: DataTypes.DATE,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Date harus diisi'
+        }
+      }
+    },
     TeacherId: DataTypes.INTEGER
   }, {
     sequelize,

@@ -15,7 +15,9 @@ class StudentController{
     }
 
     static addForm(req, res){
-        res.render('addstudent.ejs')
+        const pesan = req.app.locals.pesan || ''
+        delete req.app.locals.pesan
+        res.render('addstudent.ejs', {pesan})
     }
 
     static addPost(req, res){
@@ -26,16 +28,28 @@ class StudentController{
             res.redirect('/student')
         })
         .catch((err) => {
-            res.send(err)
+            if(err.name === "SequelizeValidationError"){
+                if(err.errors){
+                    let errors = err.errors.map(elemen => {
+                        return elemen.message
+                    })
+                    req.app.locals.pesan = errors
+                }
+                res.redirect(`/student/add`)
+            }
+            else{
+                res.send(err)
+            }
         })
     }
 
     static editForm(req, res){
         const id = req.params.id
-
+        const pesan = req.app.locals.pesan || ''
+        delete req.app.locals.pesan
         Student.findByPk(id)
         .then((data) => {
-            res.render('editstudent.ejs', { data })
+            res.render('editstudent.ejs', { data, pesan })
         })
         .catch((err) => {
             res.send(err)
@@ -57,7 +71,18 @@ class StudentController{
             res.redirect('/student')
         })
         .catch((err) => {
-            res.send(err)
+            if(err.name === "SequelizeValidationError"){
+                if(err.errors){
+                    let errors = err.errors.map(elemen => {
+                        return elemen.message
+                    })
+                    req.app.locals.pesan = errors
+                }
+                res.redirect(`/student/edit/${req.params.id}`)
+            }
+            else{
+                res.send(err)
+            }
         })
     }
 

@@ -8,7 +8,9 @@ class TeacherController{
     }
 
     static addForm(req, res){
-        res.render('addteacher.ejs')
+        const pesan = req.app.locals.pesan || ''
+        delete req.app.locals.pesan
+        res.render('addteacher.ejs', {pesan})
     }
 
     static addPost(req, res){
@@ -20,7 +22,18 @@ class TeacherController{
             res.redirect('/teacher')
         })
         .catch((err) => {
-            res.send(err)
+            if(err.name === "SequelizeValidationError"){
+                if(err.errors){
+                    let errors = err.errors.map(elemen => {
+                        return elemen.message
+                    })
+                    req.app.locals.pesan = errors
+                }
+                res.redirect(`/teacher/add`)
+            }
+            else{
+                res.send(err)
+            }
         })
     }
 
