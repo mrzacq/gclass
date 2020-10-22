@@ -74,6 +74,22 @@ class StudentController{
             res.send(err)
         })
     }
+
+    static getListTask(req, res){
+        const id = req.params.id
+
+        Student.findByPk(id, {
+            include: Task,
+            order: [[{model: Task}, 'id', 'asc']]
+        })
+        .then((data) => {
+            // res.send({data})
+            res.render('studentlisttask.ejs', {data})
+        })
+        .catch((err) => {
+            res.send(err)
+        })
+    }
 }
 
 module.exports = StudentController

@@ -11,29 +11,21 @@
     <a href="/student"><button>Student</button></a>
     <a href="/task"><button>Task</button></a>
     <a href="/student/add"><button><b>Add Student</b></button></a>
-    <h1>INI STUDENT</h1>
+    <h1>INI STUDENT LIST TASK</h1>
     <table border="1">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Action</th>
+                <th>Taskname</th>
+                <th>Deadline</th>
             </tr>
         </thead>
         <tbody>
-            <% data.forEach((elemen) => { %>
+            <% data.Tasks.forEach((task) => { %>
                 <tr>
-                    <td><%= elemen.id %></td>
-                    <td><%= elemen.fullname() %></td>
-                    <td><%= elemen.email %></td>
-                    <td><%= elemen.phone %></td>
-                    <td><a href="/student/edit/<%= elemen.id %>">Edit</a>
-                    ||
-                    <a href="/student/delete/<%= elemen.id %>">Delete</a>
-                    ||
-                    <a href="/student/task/<%= elemen.id %>">See Task</a></td>
+                    <td><%= task.id %></td>
+                    <td><%= task.taskname %></td>
+                    <td><%= task.deadline %></td>
                 </tr>
             <% }) %>
         </tbody>

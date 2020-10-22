@@ -7,5 +7,6 @@ router.post('/add', StudentController.addPost)
 router.get('/edit/:id', StudentController.editForm)
 router.post('/edit/:id', StudentController.editPost)
 router.get('/delete/:id', StudentController.delete)
+router.get('/task/:id', StudentController.getListTask)
 
 module.exports = router

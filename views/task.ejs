@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ini Teacher</title>
+    <title>Ini Task</title>
 </head>
 <body>
-    <a href="/">Home</a>
-    <a href="/teacher">Teacher</a>
-    <a href="/student">Student</a>
-    <a href="/task/add">Add Task</a>
-
+    <a href="/"><button>Home</button></a>
+    <a href="/teacher"><button>Teacher</button></a>
+    <a href="/student"><button>Student</button></a>
+    <a href="/task"><button>Task</button></a>
+    <a href="/task/add"><button><b>Add Task</b></button></a>
+    <h1>INI TASK</h1>
     <table border="1">
         <thead>
             <tr>
@@ -18,6 +19,7 @@
                 <th>Task</th>
                 <th>Deadline</th>
                 <th>Assigne</th>
+                <th>PostedAt</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -28,14 +30,16 @@
                     <td><%= elemen.taskname %></td>
                     <td><%= new Date(elemen.deadline + 'UTC').toISOString().slice(0, 10) %></td>
                     <td><%= elemen.Teacher ? elemen.Teacher.fullname : '-' %></td>
+                    <td><%= timesince(elemen.createdAt) %></td>
                     <td><a href="/task/edit/<%= elemen.id %>">Edit</a>
                     ||
                     <a href="/task/delete/<%= elemen.id %>">Delete</a>
                     ||
-                    <a href="/student/add/<%= elemen.id %>">Add Student</a></td>
+                    <a href="/task/student/add/<%= elemen.id %>">Add Student or See Student</a></td>
                 </tr>
             <% }) %>
         </tbody>
     </table>
 </body>
 </html>
+

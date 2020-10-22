@@ -1,14 +1,13 @@
-const { Teacher, Task, Student } = require('../models/index')
-const studenttask = require('../models/studenttask')
-const task = require('../models/task')
-
+const { Teacher, Task, Student, StudentTask } = require('../models/index')
+const timesince = require('../helper/timesince')
 class TaskController{
     static findAll(req, res){
         Task.findAll({
-            include: [Teacher, Student]
+            include: [Teacher, Student],
+            order: [['id', 'asc']]
         })
         // .then(data => res.send(data))
-        .then(data => res.render('task', { data }))
+        .then(data => res.render('task', { data, timesince }))
         .catch(err => res.send(err))
     }
 
@@ -64,38 +63,44 @@ class TaskController{
             where: {id: id}
         })
         .then(data => res.redirect('/task'))
-        .catch(err => res.send(data))
+        .catch(err => res.send(err))
     }
 
     static addFormStudent(req, res){
-        const id = req.params.id
-        let target;
+        const id = +req.params.id
+        let task = [];
 
-        Task.findByPk(id,{
-            include: Student
+        Task.findByPk(id, {
+            include: Student,
+            order: [[{model: Student}, 'id', 'asc']]
         })
-        .then(data=> {
-             target = data
-             return Student.findAll()
-        }
-        )
-        .then(data2=>{
-            res.render('addStudentTask', {data = target, data2})
+        .then((data) => {
+            task = data
+            return Student.findAll()
         })
-        .catch(err=>{
+        .then((student) => {
+            // res.send( { task, student } )
+            res.render('addStudentTask.ejs', { task, student } )
+        })
+        .catch((err) => {
             res.send(err)
         })
     }
 
     static addPostStudent(req, res){
-        const idStudent = req.params.id
-        const {StudentId, TaskId} = req.body
+        let idTask = req.params.id
+        const { StudentId } = req.body
+        const input = { StudentId, TaskId: idTask }
 
-        const input = {StudentId, TaskId}
         StudentTask.create(input,{
-            individualhooks = true
+            individualhooks: true
         })
-        .then()
+        .then((data) => {
+            res.redirect(`/task/student/add/${idTask}`)
+        })
+        .catch((err) => {
+            res.send(err)
+        })
     }
 }
 module.exports = TaskController

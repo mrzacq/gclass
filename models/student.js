@@ -26,5 +26,10 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Student',
   });
+  Student.beforeCreate((instance, options) => {
+    if(instance.phone){
+      instance.phone = `+62${instance.phone}`
+    }
+  })
   return Student;
 };
